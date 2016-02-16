@@ -32,11 +32,11 @@ void setup() {
 void loop() {
   
  if ( radio.available()) {   // While there is data ready
-        String vastaanotettu;
-        String tuloste;
+        String received;
+        String output;
         while (radio.available()) { 
-        tuloste == radio.read( &vastaanotettu, sizeof(String) );             // Get the payload
-        Serial.print(tuloste);                            // Print revceived
+        output == radio.read( &received, sizeof(String) );             // Get the payload
+        Serial.print(output);                                          // Print output to output
         }      
     }
  else {}
