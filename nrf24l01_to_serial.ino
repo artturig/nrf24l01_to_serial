@@ -30,7 +30,13 @@ void setup() {
 }
 
 void loop() {
-  
+if(radio.available()){
+       char tmpArray[19];                                               // This generally should be the same size as the sending array
+       radio.read(&tmpArray,sizeof(tmpArray));  // Reading 19 bytes of payload (18 characters + NULL character)
+       Serial.println(tmpArray);                                   // Prints only the received characters because the array is NULL terminated
+}
+}
+/*
  if ( radio.available()) {   // While there is data ready
         String received;
         String output;
@@ -42,3 +48,4 @@ void loop() {
  else {}
     
 }
+*/
