@@ -16,9 +16,8 @@ byte addresses[][6] = {"1Node","2Node"};
 void setup() {
   Serial.begin(57600);
   printf_begin();
-  printf("\n\rRF24/examples/GettingStarted/\n\r");
-  printf("*** PRESS 'T' to begin transmitting to the other node\n\r");
-
+  printf("nfr24l01_to_serial");
+  
   // Setup and configure rf radio
   radio.begin();                          // Start up the radio
   radio.setAutoAck(1);                    // Ensure autoACK is enabled
@@ -31,7 +30,7 @@ void setup() {
 
 void loop() {
 if(radio.available()){
-       char tmpArray[19];                                               // This generally should be the same size as the sending array
+       char tmpArray[32];                                               // This generally should be the same size as the sending array
        radio.read(&tmpArray,sizeof(tmpArray));  // Reading 19 bytes of payload (18 characters + NULL character)
        Serial.println(tmpArray);                                   // Prints only the received characters because the array is NULL terminated
 }
