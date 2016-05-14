@@ -35,16 +35,3 @@ if(radio.available()){
        Serial.println(tmpArray);                                   // Prints only the received characters because the array is NULL terminated
 }
 }
-/*
- if ( radio.available()) {   // While there is data ready
-        String received;
-        String output;
-        while (radio.available()) { 
-        output == radio.read( &received, sizeof(String) );             // Get the payload
-        Serial.print(output);                                          // Print output to output
-        }      
-    }
- else {}
-    
-}
-*/
