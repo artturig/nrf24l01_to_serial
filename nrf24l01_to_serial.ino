@@ -11,7 +11,7 @@
 // Hardware configuration: Set up nRF24L01 radio on SPI bus plus pins 9 & 10 
 RF24 radio(9,10);
 
-byte addresses[][6] = {"1Node","2Node"};
+byte addresses[][6] = {"1Node","2Node" ,"3Node"};
 
 void setup() {
   Serial.begin(57600);
@@ -22,10 +22,11 @@ void setup() {
   radio.begin();                          // Start up the radio
   radio.setAutoAck(1);                    // Ensure autoACK is enabled
   radio.setRetries(15,15);                // Max delay between retries & number of retries
-  radio.openWritingPipe(addresses[1]);
+ // radio.openWritingPipe(addresses[1]);
   radio.openReadingPipe(1,addresses[0]);
+  radio.openReadingPipe(2,addresses[1]);
   radio.startListening();                 // Start listening
-  radio.printDetails();                   // Dump the configuration of the rf unit for debugging
+//  radio.printDetails();                   // Dump the configuration of the rf unit for debugging
 }
 
 void loop() {
