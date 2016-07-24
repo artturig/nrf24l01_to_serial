@@ -17,7 +17,7 @@ byte addresses[][6] = {"1Node","2Node" ,"3Node"};
 void setup() {
   Serial.begin(57600);
   printf_begin();
-  printf("nfr24l01_to_serial");
+  //printf("nfr24l01_to_serial");
   
   // Setup and configure rf radio
   radio.begin();                          // Start up the radio
@@ -27,7 +27,7 @@ void setup() {
   radio.openReadingPipe(1,addresses[0]);
   radio.openReadingPipe(2,addresses[1]);
   radio.startListening();                 // Start listening
-//  radio.printDetails();                   // Dump the configuration of the rf unit for debugging
+//  radio.printDetails();                 // Dump the configuration of the rf unit for debugging
 }
 
 void loop() {
@@ -36,7 +36,7 @@ void loop() {
        radio.read(&tmpArray,sizeof(tmpArray));  // Read payload + NULL character)
        char *s;
        s = strstr(tmpArray, ";");               // search for string ";" in tmpArray so we know the valid message received
-        if (s != NULL) {                    // if successful then s now points at "hassasin"
+        if (s != NULL) {                        // if successful then s now points at ";"
           //printf("Found string at index = %d\n", s - tmpArray); // index of ";" in buff can be found by pointer subtraction
           Serial.println(tmpArray);             // found so print to serial
           }                                  
