@@ -2,6 +2,7 @@
 #include "nRF24L01.h"
 #include "RF24.h"
 #include "printf.h"
+#include "string.h"
 
 //////////////////////////////////////////////////////
 // listen messages and write to serial port
@@ -30,9 +31,19 @@ void setup() {
 }
 
 void loop() {
-if(radio.available()){
-       char tmpArray[32];                                               // This generally should be the same size as the sending array
-       radio.read(&tmpArray,sizeof(tmpArray));  // Reading 19 bytes of payload (18 characters + NULL character)
-       Serial.println(tmpArray);                                   // Prints only the received characters because the array is NULL terminated
-}
+  if(radio.available()){
+       char tmpArray[32];                       // This generally should be the same size as the sending array
+       radio.read(&tmpArray,sizeof(tmpArray));  // Read payload + NULL character)
+       char *s;
+       s = strstr(tmpArray, ";");               // search for string ";" in tmpArray so we know the valid message received
+        if (s != NULL) {                    // if successful then s now points at "hassasin"
+          //printf("Found string at index = %d\n", s - tmpArray); // index of ";" in buff can be found by pointer subtraction
+          Serial.println(tmpArray);             // found so print to serial
+          }                                  
+        else  {
+          // dont print anything
+          //printf("String not found\n");  // `strstr` returns NULL if search string not found
+          //Serial.println(tmpArray);
+        }
+  }      
 }
